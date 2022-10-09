@@ -19,4 +19,4 @@ WORKDIR /app
 RUN mkdir -p Documents
 COPY --from=build /app/out .
 EXPOSE 80
-ENTRYPOINT ["dotnet", "dcp.WebApi.dll"]
+ENTRYPOINT ["dotnet", "PostgresWebApi.dll"]
