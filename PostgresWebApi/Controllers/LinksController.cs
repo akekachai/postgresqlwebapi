@@ -35,37 +35,18 @@ namespace PostgresWebApi.Controllers
           
         }
 
-        //[HttpGet]
-        //public  Task<IActionResult> getall()
-        //{
-        //    //try
-        //    //{
-        //    //    //var data = await _linksrepositories.GetAll();
-        //    //    //return Ok(new { data = data ,success= true,message=""});
-        //    //    return Ok(new {  success = true, message = "" });
-        //    //}
-        //    //catch(Exception ex)
-        //    //{
-        //    //    return BadRequest(new { success = false, message = ex.Message });
-        //    //}
-
-        //}
-        private static readonly string[] Summaries = new[]
-      {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IActionResult> getall()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            try
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                var data = await _linksrepositories.GetAll();
+            return Ok(new { data = data ,success= true,message=""});
+        }
+            catch(Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
         }
     }
 }
