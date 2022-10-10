@@ -23,8 +23,30 @@ namespace PostgresWebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> insert(Links _links)
         {
-            await _linksrepositories.Insert(_links);
-            return Ok(new { success= true,message =""});
+            try
+            {
+                await _linksrepositories.Insert(_links);
+                return Ok(new { success = true, message = "" });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
+          
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> getall()
+        {
+            try
+            {
+                var data = await _linksrepositories.GetAll();
+            return Ok(new { data = data ,success= true,message=""});
+        }
+            catch(Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
         }
     }
 }

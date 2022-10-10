@@ -1,4 +1,5 @@
-﻿using PostgresWebApi.data;
+﻿using Microsoft.EntityFrameworkCore;
+using PostgresWebApi.data;
 using PostgresWebApi.Models;
 using PostgresWebApi.Repositories.Interface;
 using System;
@@ -17,6 +18,10 @@ namespace PostgresWebApi.Repositories
             _context = context;
         }
 
+        public async Task<IReadOnlyList<Links>> GetAll()
+        {
+            return await _context.links.OrderByDescending(l => l.id).ToListAsync();
+        }
 
         public async Task Insert(Links entity)
         {
